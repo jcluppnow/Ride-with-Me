@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, height=device-height,
+      initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+      <meta name="format-detection" content="telephone=no">
+      <link rel="stylesheet" href="{% static 'application/compiled/app.css' %}">
+      <title>Ride With Me Register</title>
+  </head>
+
+  <body class="bg-gray-600">
+    <!-- Main container to enable flexing on smaller devices. -->
+    <div class="w-screen flex h-screen">
+      <div class="w-5/6 m-auto">
+        <!-- Container for all registration components. -->
+        <form method = "POST" class="p-4 max-w-md mx-auto bg-white rounded filter drop-shadow-lg">
+          {%csrf_token %}
+          <!-- Container for logo image. -->
+          <div class="container max-w-screen-lg mx-auto pb-3">
+            <!-- Source the image from our static directory. -->
+            <img class="mx-auto w-2/6 h-1/6"
+            src="{% static 'application/logos/rwm-logo.png' %}"/>
+          </div>
+
+          <!-- Main header depicting application name. -->
+          <h1 class="font-medium text-5xl text-center py-3 text-black">
+            Ride with Me
+          </h1>
+
+          <!-- Label attached to email input field. -->
+          <label class="font-medium block mb-1 mt-6 text-black" for="email"
+          >
+          Email
+          </label>
+
+          <!-- Input field for email. -->
+          <input cy="email" input name = "email" class="cursor-text appearance-none border-2 rounded w-full py-3 px-3
+          leading-tight border-gray-300 bg-gray-100 focus:outline-none
+          focus:border-blue-500 focus:bg-white text-gray-500 pr-16"
+          id="email" type="text" autocomplete="off" autofocus />
+
+          <!-- Check for email form errors. -->
+          {% for error in form.email.errors %}
+          <div class="text-center text-red-400">
+            <p class="text-danger">{{ error }}</p>
+          </div>
+          {% endfor %}
+
+          <!-- Label attached to full name input field. -->
+          <label class="font-medium block mb-1 mt-6 text-black" for="full_name">
+            Full Name
+          </label>
+
+          <!-- Input field for full name -->
+          <input cy="full_name" input name = "full_name" class="cursor-text appearance-none border-2 rounded w-full py-3 px-3
+          leading-tight border-gray-300 bg-gray-100 focus:outline-none
+          focus:border-blue-500 focus:bg-white text-gray-500 pr-16"
+          id="full_name" type="text" autocomplete="off" autofocus />
+
+          <!-- Check for errors in full name. -->
+          {% for error in form.full_name.errors %}
+          <div class="text-center text-red-400">
+            <p class="text-danger">{{ error }}</p>
+          </div>
+          {% endfor %}
+
+          <!-- Label attached to password input field. -->
+          <label class="font-medium block mb-1 mt-6 text-gray-700"
+          for="password">
+            Password
+          </label>
+
+          <!-- Container for password input field and toggle controls. -->
+          <div class="relative w-full">
+
+            <!-- Container for positioning visibility vector. -->
+            <div class="absolute inset-y-0 right-0 flex items-center px-2">
+              <img src="{% static 'application/vectors/eye-invisible.svg' %}"
+              class="cursor-pointer stroke-current text-gray-300 w-7 h-7 js-password-icon" id="toggle"
+              onclick="togglePasswordEventHandler()"/>
+            </div>
+
+            <!-- Input field for password. -->
+            <input cy="password1" input name = "password1" class="cursor-text appearance-none border-2 rounded w-full py-3 px-3
+            leading-tight border-gray-300 bg-gray-100 focus:outline-none
+            focus:border-blue-500 focus:bg-white text-gray-700 pr-16
+            js-password" id="password" type="password" autocomplete="off"
+            />
+          </div>
+
+          <input type="hidden" name="next" value="{{ next }}"/>
+
+          <!-- Check for password form errors. -->
+          {% for error in form.password1.errors %}
+          <div class="text-center text-red-400">
+            <p class="text-danger">{{ error }}</p>
+          </div>
+          {% endfor %}
+
+          <!-- Label attached to password2 input field. -->
+          <label class="font-medium block mb-1 mt-6 text-gray-700"
+          for="password">
+            Re-Enter Password
+          </label>
+
+          <!-- Container for password2 input field and toggle controls. -->
+          <div class="relative w-full">
+
+            <!-- Container for positioning visibility vector. -->
+            <div class="absolute inset-y-0 right-0 flex items-center px-2">
+              <img src="{% static 'application/vectors/eye-invisible.svg' %}"
+              class="cursor-pointer stroke-current text-gray-300 w-7 h-7 js-password-icon2" id="toggle"
+              onclick="togglePasswordConfirmationEventHandler()"/>
+            </div>
+
+            <!-- Input field for password2. -->
+            <input cy="password2" input name = "password2" class="cursor-text appearance-none border-2 rounded w-full py-3 px-3
+            leading-tight border-gray-300 bg-gray-100 focus:outline-none
+            focus:border-blue-500 focus:bg-white text-gray-700 pr-16
+            js-password2" id="password" type="password" autocomplete="off"
+            />
+          </div>
+
+          <input type="hidden" name="next" value="{{ next }}"/>
+
+          <!-- Check for password form errors. -->
+          {% for error in form.password2.errors %}
+          <div class="text-center text-red-400">
+            <p class="text-danger">{{ error }}</p>
+          </div>
+          {% endfor %}
+
+          {% if form.non_field_errors %}
+          <div class="text-center text-red-400">
+            {% for error in form.non_field_errors %}
+              <p Passwords do not match </p>
+            {% endfor %}
+          {% endif %}
+
+          <!-- Link to Login page. -->
+          <div class="justify-center"
+            style="color:blue"> <p> <a href="/accounts/login/"><u>Log in to account</a></u></p>
+          </div>
+
+          <!-- Container for registration link. -->
+          <div class="flex flex-col justify-center items-center">
+            <!-- Button to trigger register event. -->
+            <button cy="create-account" button class="items-center cursor-pointer w-2/4 bg-rwmDarkBlue hover:bg-rwmOrange
+            text-white font-medium py-3 px-4 mt-10 rounded focus:outline-none
+            focus:shadow-outline transition duration-200" type="submit">
+              Create Account
+            </button>
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
+
+<!-- Required to be able to access static paths to vector assets. -->
+<script>
+  var invisibleEyeUrl = "{% static 'application/vectors/eye-invisible.svg' %}";
+  var visibleEyeUrl = "{% static 'application/vectors/eye-visible.svg' %}";
+</script>
+
+<!-- Import default JS file. -->
+<script type="text/javascript" src="{% static 'application/register.js' %}"></script>

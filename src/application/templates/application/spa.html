@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <!-- Link to Mapworks application. -->
+        <link rel="stylesheet" href="https://api.mapworks.io/studio/latest/css/studio-core.css">
+		    <script type="text/javascript" src="https://api.mapworks.io/studio/latest/js/studio-core.js" defer></script>
+        <link rel="stylesheet" href="{% static 'application/compiled/app.css' %}">
+        <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+        <!-- Link favicon. -->
+        <link rel="icon" type="image/svg+xml" href="{% static 'application/vectors/favicon.svg' %}">
+        <link rel="icon" type="image/png" href="{% static 'application/vectors/favicon.png' %}">
+        <script type="text/javascript" src="{% static 'application/compiled/app.js' %}" defer></script>
+        <!-- Link file to convert gpx and kml files to GeoJSON. -->
+        <script src="{% static 'application/togeojson.js' %}" defer></script>
+        <title>Ride With Me</title>
+    </head>
+    <body class="bg-gray-200">
+        <div id="app">
+        </div>
+    </body>
+
+</html>
